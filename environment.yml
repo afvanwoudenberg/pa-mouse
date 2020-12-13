@@ -1,0 +1,8 @@
+name: pa-mouse
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - opencv
+  - pynput
+  - pillow
