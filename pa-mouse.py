@@ -50,7 +50,7 @@ def run():
             mask2 = cv2.inRange(hsv, lower_red, upper_red)
             mask_red = mask1 + mask2
 
-            _, contours, _ = cv2.findContours(mask_red.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            contours, _ = cv2.findContours(mask_red.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             
             # if the contours are formed
             if len(contours) > 0:
@@ -74,7 +74,7 @@ def run():
                 upper_green = np.array([95, 255, 255])
                 mask_green = cv2.inRange(hsv, lower_green, upper_green)
 
-                _, contours, _ = cv2.findContours(mask_green.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+                contours, _ = cv2.findContours(mask_green.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
                 # if the contours are formed
                 if len(contours) > 0:
@@ -96,15 +96,16 @@ def run():
     is_capturing = False
     vc.release()
 
-def setShortExposureTime():
+def set_short_exposure_time():
     """Setup webcam with shorter exposure time"""
-    os.system("v4l2-ctl -c exposure_auto=1 -c exposure_auto_priority=0 -c exposure_absolute=30")
+    os.system("v4l2-ctl -c auto_exposure=1 -c exposure_dynamic_framerate=0 -c exposure_time_absolute=30")
 
-def restoreCameraSettings():
+def restore_camera_settings():
     """Restore camera settings"""
-    os.system("v4l2-ctl -c exposure_auto=3 -c exposure_auto_priority=1")
+    os.system("v4l2-ctl -c auto_exposure=3 -c exposure_dynamic_framerate=1")
 
 if __name__ == '__main__':
-    setShortExposureTime()
+    set_short_exposure_time()
     run()
-    restoreCameraSettings()
+    restore_camera_settings()
+
