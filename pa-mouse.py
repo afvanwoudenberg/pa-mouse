@@ -98,7 +98,7 @@ def run():
 
 def set_short_exposure_time():
     """Setup webcam with shorter exposure time"""
-    os.system("v4l2-ctl -c auto_exposure=1 -c exposure_dynamic_framerate=0 -c exposure_time_absolute=30")
+    os.system("v4l2-ctl -c auto_exposure=1 -c exposure_dynamic_framerate=0 -c exposure_time_absolute=10")
 
 def restore_camera_settings():
     """Restore camera settings"""
